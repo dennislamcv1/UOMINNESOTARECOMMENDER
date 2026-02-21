@@ -1,0 +1,50 @@
+{
+    "output_file": "logistic-results.csv",
+    "user_output_file": "logistic-users.csv",
+    "cache_directory": null,
+    "thread_count": 0,
+    "share_model_components": true,
+    "datasets": [
+        "crossfold.out/datasets.yaml"
+    ],
+    "algorithms": {
+        "ii": "../cfg/ii.groovy",
+        "svd": "../cfg/svd.groovy",
+        "svd-log": "../cfg/svd-log.groovy",
+        "lucene": "../cfg/lucene.groovy",
+        "popular": "../cfg/popular.groovy",
+        "ii-log": "../cfg/ii-log.groovy",
+        "lucene-svd-log": "../cfg/lucene-svd-log.groovy",
+        "ii-svd-log": "../cfg/ii-svd-log.groovy",
+        "lucene-log": "../cfg/lucene-log.groovy"
+    },
+    "tasks": [
+        {
+            "type": "predict",
+            "output_file": null,
+            "metrics": [
+                "coverage",
+                "ndcg"
+            ]
+        },
+        {
+            "type": "recommend",
+            "output_file": null,
+            "metrics": [
+                "ndcg",
+                {
+                    "type": "map",
+                    "goodItems": "user.testItems"
+                },
+                {
+                    "type": "mrr",
+                    "goodItems": "user.testItems"
+                }
+            ],
+            "list_size": 25,
+            "candidates": "allItems",
+            "exclude": "user.trainItems",
+            "label_prefix": null
+        }
+    ]
+}
